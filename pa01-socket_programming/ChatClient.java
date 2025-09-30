@@ -1,23 +1,19 @@
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class ChatClient {
     
     Socket skt;
     DataInputStream input;
     DataOutputStream output;
-    private int port = 5000;
 
-    public void Client(String address, int port) {
+    public ChatClient(String serverAddress, int serverPort) {
         try {
-            skt = new Socket(address, port);
+            skt = new Socket(serverAddress, serverPort);
             System.out.println("Client connected to server.");
 
             input = new DataInputStream(System.in);
             output = new DataOutputStream(skt.getOutputStream());
-
-            login();
 
         } catch (Exception e) {
             System.err.println("An error occured with the client.");
@@ -27,6 +23,6 @@ public class ChatClient {
 
     public static void main(String[] args) {
         
-        Client client = new Client("localhost", PORT);
+        ChatClient client = new ChatClient("localhost", 5000);
     }
 }
